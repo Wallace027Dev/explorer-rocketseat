@@ -3,9 +3,29 @@
 * {
   padding: 0;
   margin: 0;
-  text-decoration: none;
   box-sizing: border-box;
   color: white;
+}
+
+:root {
+  --card-color-primary: #f7dd43;
+  --card-title-color-border: #746615;
+  --card-bg-color: #1d1c19;
+  --bg: url(./assets/bg-yellow.svg);
+}
+
+body.blue {
+  --card-color-primary: #338af3;
+  --card-title-color-border: #338af3;
+  --card-bg-color: #202024;
+  --bg: url(./assets/bg-blue.svg);
+}
+
+body.green {
+  --card-color-primary: #047c3f;
+  --card-title-color-border: #047c3f;
+  --card-bg-color: #1a1f1b;
+  --bg: url(./assets/bg-green.svg);
 }
 
 ul {
@@ -13,37 +33,44 @@ ul {
 }
 
 body {
-  background-color: #121214;
-  background-image: url(./assets/bg.svg);
-  background-position-x: center;
-  background-position-y: -715px;
+  /*   background-color: #121214;
+  background-image: var(--bg);
+  background-position: top center;
+  background-repeat: no-repeat;
+  background-size: cover; */
+  /* SHORT HAND */
+  background: #121214 var(--bg) no-repeat top center/cover;
 }
 
 body * {
   font-family: "Roboto", sans-serif;
 }
 
-#app {
+/* #app {
   width: fit-content;
   margin: 52px auto;
-}
+} */
 
 header {
   margin-bottom: 63px;
   text-align: center;
+  margin-top: 2rem;
 }
 
 #cards {
   display: flex;
   flex-direction: column;
   gap: 32px;
+  width: fit-content;
+  margin: auto;
+  padding-top: 52px;
 }
 
 .card {
   padding: 32px 23px;
   text-align: center;
-  background-color: #1d1c19;
-  border-bottom: 2px solid #f7dd43;
+  background-color: var(--card-bg-color);
+  border-bottom: 2px solid var(--card-color-primary);
   border-radius: 6px;
 }
 
@@ -53,12 +80,12 @@ header {
   justify-content: center;
   align-items: center;
   padding: 8px 16px;
-  border: 1px solid #746615;
+  border: 1px solid var(--card-title-color-border);
   border-radius: 6px;
   width: fit-content;
   margin-inline: auto;
   margin-bottom: 53px;
-  color: #f7dd43;
+  color: var(--card-color-primary);
 }
 
 .card h2 span {
@@ -90,4 +117,47 @@ header {
 .card ul li + li {
   padding-top: 24px;
   border-top: 1px solid #323238;
+}
+
+.card ul li img:hover {
+  transform: scale(1.1);
+}
+
+.card ul li img {
+  transition: transform 0.3s;
+}
+
+.card {
+  opacity: 0;
+  animation: appear 2s forwards;
+}
+
+.card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.card:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+.card:nth-child(3) {
+  animation-delay: 0.5s;
+}
+
+@keyframes appear {
+  0% {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@media (min-width: 700px) {
+  #cards {
+    max-width: 670px;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
 }
